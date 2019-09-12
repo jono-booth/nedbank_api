@@ -1,5 +1,9 @@
 # NedbankApi
 
+The purpose of this gem is to streamline development of a Ruby application when using the [Nedbank Marketplace API](https://apim.nedbank.co.za/static/docs).
+
+This gem currently has only the APIs that I need for my project(s). If you are in need of other parts of the API then please feel free to contribute.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -18,7 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You should already have your client ID and client secret which is generated in the [My Applications](https://apim.nedbank.co.za/application).
+
+### Authenticate
+```ruby
+$ client = NedbankApi.client.new(client_id: [CLIENT_ID], client_secret: [CLIENT_SECRET])
+$ client.authenticate
+$ client.authenticated?
+#> true
+```
+
+### Payments
+```ruby
+$ client = NedbankApi.client.new(client_id: [CLIENT_ID], client_secret: [CLIENT_SECRET])
+$ client.payments.create_intent(payment_batch)
+```
 
 ## Development
 
