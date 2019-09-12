@@ -1,0 +1,10 @@
+require 'nedbank_api/version'
+require 'nedbank_api/client'
+require 'nedbank_api/http'
+require 'nedbank_api/response_objects/response_object'
+require 'nedbank_api/response_objects/intent_token'
+
+require 'uri'
+require 'openssl'
+require 'net/http'
+require 'uri'
