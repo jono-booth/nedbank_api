@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split('/\n')
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files = s.files.grep(%r{^(test|spec|features)/})
+  s.test_files = s.files.grep(%r{^spec/})
   s.require_paths = ['lib']
 
   s.add_development_dependency 'bundler', '~> 1.5'
@@ -23,9 +23,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rspec-nc'
   s.add_development_dependency 'webmock'
+  s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'pry-remote'
   s.add_development_dependency 'pry-nav'
+  s.add_development_dependency 'httplog'
+
 end

@@ -1,4 +1,5 @@
 # NedbankApi
+**(Under Construction)**
 
 The purpose of this gem is to streamline development of a Ruby application when using the [Nedbank Marketplace API](https://apim.nedbank.co.za/static/docs).
 
@@ -22,21 +23,69 @@ Or install it yourself as:
 
 ## Usage
 
-You should already have your client ID and client secret which is generated in the [My Applications](https://apim.nedbank.co.za/application).
+### 1) Request token (light)
 
-### Authenticate
+[Official Documentation](https://apim.nedbank.co.za/static/docs/payments-token)
+
+Using your client ID and client secret (which you obtained when you created an application), you will make a POST request using the endpoint and values below to retrieve a Payment intent access token.
+
+Please note that in order to use this API, you will have to be subscribed to both the Nedbank Authorisation API and this API.
+
 ```ruby
-$ client = NedbankApi.client.new(client_id: [CLIENT_ID], client_secret: [CLIENT_SECRET])
-$ client.authenticate
+$ client = NedbankApi::Client.new(
+    client_id: [PROVIDED_CLIENT_ID],
+    client_secret: [PROVIDED_CLIENT_SECRET],
+    api_url: 'https://api.nedbank.co.za/apimarket/sandbox'
+  )
+$ client.authenticate!
 $ client.authenticated?
 #> true
 ```
 
-### Payments
+If there is an error the error will be returned
+
 ```ruby
-$ client = NedbankApi.client.new(client_id: [CLIENT_ID], client_secret: [CLIENT_SECRET])
-$ client.payments.create_intent(payment_batch)
+$ client.authenticated?
+#> false
+$ p client.error
+#> invalid_request
+$ p client.error_description
+#> 'Invalid Request'
 ```
+
+### 2) Request Payment intent ID
+
+[Official Documentation](https://apim.nedbank.co.za/static/docs/payments-intent)
+
+Using the Payment intent access token you received in the previous call, proceed to make a payment intent call to receive a Payment ID using the endpoint and values below.
+
+
+```ruby
+$ payment_batch = {
+    "Data": {
+      "Initiation": {
+    ...
+    }
+  }.to_json
+
+$ payment = client.payment.create_intent(payment_batch)
+```
+
+Now the entire response object is available to like so
+```ruby
+$ p payment.Data.PaymentId
+# "456c1abe-9568-4335-a914-73bd1df0085f"
+$ p payment.Data.Initiation.InstructedAmount.Amount
+# "55.60"
+$ p payment.Data.Initiation.InstructedAmount.Currency
+# "ZAR"
+```
+
+### 3) Get Payments authorization
+
+[Official Documentation](https://apim.nedbank.co.za/static/docs/payments-auth)
+
+To make use of the Payment ID you received in the previous call, add it to the user parameter values found below in the authorization URL to retrieve an access code that you will use to get a heavy/submission token. Make use of the url and values found below.
 
 ## Development
 

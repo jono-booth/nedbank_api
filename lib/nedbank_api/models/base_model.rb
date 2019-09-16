@@ -1,6 +1,6 @@
 module NedbankApi
-  module ResponseObjects
-    class ResponseObject < Delegator
+  module Models
+    class BaseModel < Delegator
       attr_accessor :initalized_at
 
       def initialize(obj)
@@ -19,4 +19,3 @@ module NedbankApi
     end
   end
 end
-

@@ -5,6 +5,7 @@
 /doc/
 /pkg/
 /spec/reports/
+/spec/factories/real_client.rb
 /tmp/
 
 # rspec failure tracking

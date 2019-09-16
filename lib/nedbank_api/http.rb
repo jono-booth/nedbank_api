@@ -1,9 +1,7 @@
 module NedbankApi
   class Http
-    API_DOMAIN = 'https://api.nedbank.co.za/apimarket/sandbox'
-
     def initialize(url:)
-      @url = URI(API_DOMAIN + url)
+      @url = URI(url)
     end
 
     def net_http
@@ -13,11 +11,29 @@ module NedbankApi
       end
     end
 
-    def post(body: {})
-      request = Net::HTTP::Post.new(@url)
-      request.body = URI.encode_www_form(body)
+    def get(body: {}, headers: {})
+      request = Net::HTTP::Get.new(@url)
+
+      headers.each do |key,value|
+        request[key] = value
+      end
+
+      request.body = body
       response = net_http.request(request)
-      return response.read_body
+
+      return response
+    end
+    def post(body: {}, headers: {})
+      request = Net::HTTP::Post.new(@url)
+
+      headers.each do |key,value|
+        request[key] = value
+      end
+
+      request.body = body
+      response = net_http.request(request)
+
+      return response
     end
   end
 end
