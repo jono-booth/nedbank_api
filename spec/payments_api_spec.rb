@@ -9,7 +9,7 @@ RSpec.describe NedbankApi::PaymentsApi do
     end
 
     it 'returns a payment object' do
-      payment = NedbankApi::PaymentsApi.new.create_intent(request_body: request_body)
+      payment = NedbankApi::PaymentsApi.create_intent(request_body: request_body)
 
       expect(payment.Data.PaymentId).to eq JSON.parse(response_body)['Data']['PaymentId']
       expect(payment.Data.Initiation.InstructedAmount.Amount).to eq JSON.parse(response_body)['Data']['Initiation']['InstructedAmount']['Amount']
@@ -26,7 +26,7 @@ RSpec.describe NedbankApi::PaymentsApi do
     end
 
     it 'returns a payment submission object' do
-      submission = NedbankApi::PaymentsApi.new.submit_payment(request_body: request_body)
+      submission = NedbankApi::PaymentsApi.submit_payment(request_body: request_body)
       expect(submission.PaymentSubmissionId).to eq "62820068622336"
       expect(submission.PaymentId).to eq "8124568155717632"
       expect(submission.Status).to eq "AcceptedSettlementInProcess"
@@ -43,7 +43,7 @@ RSpec.describe NedbankApi::PaymentsApi do
     end
 
     it 'returns a payment submission object' do
-      submission = NedbankApi::PaymentsApi.new.get_payment_submission(payment_submission_id: payment_submission_id)
+      submission = NedbankApi::PaymentsApi.get_payment_submission(payment_submission_id: payment_submission_id)
       expect(submission.PaymentSubmissionId).to eq payment_submission_id
       expect(submission.Status).to eq "AcceptedSettlementInProcess"
     end

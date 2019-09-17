@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email = 'jonobth@gmail.com'
   s.metadata = { 'source_code_uri' => 'https://github.com/jono-booth/nedbank_api' }
 
-  s.files = `git ls-files`.split('/\n')
+  s.files = `git ls-files -z`.split("\x0")
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files = s.files.grep(%r{^spec/})
   s.require_paths = ['lib']

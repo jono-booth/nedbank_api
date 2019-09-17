@@ -9,11 +9,9 @@ Using your client ID and client secret (which you obtained when you created an a
 Please note that in order to use this API, you will have to be subscribed to both the Nedbank Authorisation API and this API.
 
 ```ruby
-$ client = NedbankApi::Client.new(
-    client_id: [PROVIDED_CLIENT_ID],
-    client_secret: [PROVIDED_CLIENT_SECRET]
-  )
-$ token = client.authentication.request_token_light
+$ token = NedbankApi::AuthorisationsApi.request_token_light
+$ token.authenticated?
+# true
 ```
 
 ### 2) Request Payment intent ID
@@ -30,7 +28,7 @@ $ payment_batch = {
     }
   }
 
-$ payment = client.payment.create_intent(request_body: payment_batch)
+$ payment = NedbankApi::PaymentsApi.create_intent(request_body: payment_batch)
 ```
 
 Now the entire response object is available to like so
@@ -48,7 +46,7 @@ $ p payment.Data.Initiation.InstructedAmount.Currency
 To make use of the Payment ID you received in the previous call, add it to the user parameter values found below in the authorization URL to retrieve an access code that you will use to get a heavy/submission token. Make use of the url and values found below.
 
 ```ruby
-$ authorisation_url = client.payment.authorise_payment(
+$ authorisation_url = NedbankApi::PaymentsApi.authorise_payment(
     intent: payment.Data.PaymentId,
     redirect_uri: 'https://yourapp.co.za/handle/auth/'
   )
@@ -61,10 +59,12 @@ $ p authorisation_url
 Using the code returned with the redirect URI, you must call this endpoint to get an access token for the payment submission call.
 
 ```ruby
-$ token = client.authorisation.request_token_heavy(
+$ token = NedbankApi::AuthorisationsApi.request_token_heavy(
     code: params[:code],
     redirect_uri: 'https://yourapp.co.za/handle/auth/'
   )
+$ p token.access_token
+# "TEMPACCESSTOKEN"
 ```
 
 ### 5) Payment submission
@@ -81,7 +81,7 @@ payment_batch = {
   }
 }
 
-$ payment_submission = client.payment.submit_payment(request_body: payment_batch)
+$ payment_submission = NedbankApi::PaymentsApi.submit_payment(request_body: payment_batch)
 $ p payment_submission.PaymentSubmissionId
 # p "62820068622336"
 $ payment_submission.Status
@@ -91,7 +91,7 @@ $ payment_submission.Status
 ### 6) Get Payment Submission
 
 ```ruby
-$ payment_submission = client.payment.get_payment_submission(payment_submission_id: "1878194005213184")
+$ payment_submission = NedbankApi::PaymentsApi.get_payment_submission(payment_submission_id: "1878194005213184")
 $ payment_submission.Status
 # "AcceptedSettlementInProcess"
 ```

@@ -7,8 +7,9 @@ require 'nedbank_api/models/base_model'
 require 'nedbank_api/models/intent_token'
 require 'nedbank_api/models/payment'
 require 'nedbank_api/models/payment_submission'
-require 'nedbank_api/services/http'
 require 'nedbank_api/services/client'
+require 'nedbank_api/services/configuration'
+require 'nedbank_api/services/http'
 
 require 'uri'
 require 'openssl'
@@ -17,13 +18,22 @@ require 'uri'
 require 'securerandom'
 
 module NedbankApi
-
-  @api_base = 'https://api.nedbank.co.za/apimarket/sandbox'
+  @intent_token = Models::IntentToken.new(Object.new)
 
   class << self
-    attr_accessor :client_id
-    attr_accessor :client_secret
-    attr_accessor :api_base
-    attr_accessor :access_token
+    attr_accessor :intent_token,
+      :configuration
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def reset
+      @configuration = Configuration.new
+    end
+
+    def configure
+      yield(configuration)
+    end
   end
 end

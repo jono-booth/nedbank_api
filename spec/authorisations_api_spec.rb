@@ -9,15 +9,15 @@ RSpec.describe NedbankApi::AuthenticationsApi do
       end
 
       it 'authenticates and sets the access token' do
-        token = NedbankApi::AuthenticationsApi.new.request_token_light
+        token = NedbankApi::AuthenticationsApi.request_token_light
+        expect(NedbankApi.intent_token.access_token).to eq response_body[:access_token]
         expect(token.authenticated?).to be true
-        NedbankApi.access_token = response_body[:access_token]
       end
 
       context 'with an expired access token' do
         it 'does not authenticate' do
-          token = NedbankApi::AuthenticationsApi.new.request_token_light
-          token.initalized_at = Time.now - 3599
+          token = NedbankApi::AuthenticationsApi.request_token_light
+          token.initialized_at = Time.now - 3599
           expect(token.authenticated?).to be false
           expect(token.error).to eq NedbankApi::Models::IntentToken::ERRORS[:token_expired][:error]
           expect(token.error_description).to eq NedbankApi::Models::IntentToken::ERRORS[:token_expired][:error_description]
@@ -34,8 +34,7 @@ RSpec.describe NedbankApi::AuthenticationsApi do
       end
 
       it 'does not authenticate' do
-        token = NedbankApi::AuthenticationsApi.new.request_token_light
-        token = client.authentication.request_token_light
+        token = NedbankApi::AuthenticationsApi.request_token_light
         expect(token.authenticated?).to be false
       end
     end
@@ -53,7 +52,7 @@ RSpec.describe NedbankApi::AuthenticationsApi do
     end
 
     it 'returns a payment auth url' do
-      authorisation_url = NedbankApi::AuthenticationsApi.new.authorise_intent(request_body: { intent_id: intent_id, redirect_uri: 'https://myapp.com' })
+      authorisation_url = NedbankApi::AuthenticationsApi.authorise_intent(request_body: { intentid: intent_id, redirect_uri: 'https://myapp.com' })
       expect(authorisation_url).to eq response_body
     end
   end

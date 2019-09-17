@@ -19,8 +19,9 @@ And then execute:
 
 ## Documentation
 
-1. [Authorisation API](docs/authorisations_api.md)
-2. [Payments API](docs/payments_api.md)
+1. [Getting Started](docs/getting_started.md)
+2. [Authorisation API](docs/authorisations_api.md)
+3. [Payments API](docs/payments_api.md)
 
 
 ## Development

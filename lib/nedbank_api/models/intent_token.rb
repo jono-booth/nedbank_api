@@ -1,8 +1,6 @@
 module NedbankApi
   module Models
     class IntentToken < BaseModel
-      EXPIRY_BUFFER_SECONDS = 20
-
       ERRORS = {
         token_expired: {
           error: 'token_expired',
@@ -10,12 +8,12 @@ module NedbankApi
         }
       }
 
-      attr_accessor :token_expires_at
-      attr_accessor :error
-      attr_accessor :error_description
+      attr_accessor :token_expires_at,
+       :error,
+       :error_description
 
       def token_expires_at
-        self.initalized_at - EXPIRY_BUFFER_SECONDS + self.expires_in
+        self.initialized_at + self.expires_in
       end
 
       def authenticated?
@@ -24,7 +22,7 @@ module NedbankApi
       end
 
       def expired?
-        return true if self.token_expires_at.nil?
+        return true if self.expires_in.nil?
         raise Exceptions::TokenExpired if token_expires_at < Time.now
         return false
 
