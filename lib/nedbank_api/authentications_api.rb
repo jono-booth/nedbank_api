@@ -19,7 +19,7 @@ module NedbankApi
       return intent_token
     end
 
-    def request_token_heavy(request_body:)
+    def request_token_heavy(request_body: {})
       http = Http.new(url: endpoint('/nboauth/oauth20/token'))
 
       response = http.post(
@@ -32,5 +32,25 @@ module NedbankApi
 
       return Models::IntentToken.new(JSON.parse(response.body, object_class: OpenStruct))
     end
+
+    def authorise_intent(request_body: {})
+      http = Http.new(url: endpoint('/nboauth/oauth20/authorize'))
+
+      body = URI.encode_www_form({
+          response_type: 'code',
+          scope: 'payments',
+          client_id: NedbankApi.client_id,
+          type: 'payments',
+          state: 'payments'
+      }.merge(request_body))
+
+      response = http.post(
+        headers: { "accept" => 'text/html' },
+        body: body
+      )
+
+      return response.body
+    end
+
   end
 end

@@ -10,22 +10,17 @@ This gem currently has only the APIs that I need for my project(s). If you are i
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'nedbank_api'
+gem 'nedbank_api', github: 'jono-booth/nedbank_api'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install nedbank_api
-
 ## Documentation
 
-[Authorisation API](docs/authorisations_api.md)
-[Payments API](docs/payments_api.md)
-
+1. [Authorisation API](docs/authorisations_api.md)
+2. [Payments API](docs/payments_api.md)
 
 
 ## Development

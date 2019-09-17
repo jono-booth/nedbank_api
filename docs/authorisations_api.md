@@ -13,6 +13,8 @@ $ client = NedbankApi::Client.new(
     api_url: 'https://api.nedbank.co.za/apimarket/sandbox' # Default * optional
   )
 $ token = client.authentication.request_token_light
+$ token.authenticated?
+#> true
 $ token.access_token
 #> TEMPACCESSTOKEN
 ```

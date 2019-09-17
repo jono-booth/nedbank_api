@@ -16,23 +16,6 @@ RSpec.describe NedbankApi::PaymentsApi do
     end
   end
 
-  describe '.payment_auth' do
-    let(:intent_id) { "GOODPEOPLEDRINKGOODBEER" }
-    let(:request_body) { File.read('spec/support/payment/post_intent_request.json') }
-    let(:response_body) { 'https://yourapp.co.za/handle/auth/?code=xxxxxxxxxxxxxxxxxxxxxxxxxxxx' }
-
-    before :each do
-      stub_request(:post, "https://api.nedbank.co.za/apimarket/sandbox/nboauth/oauth20/authorize").
-        with(body: Regexp.new("intentid=#{intent_id}")).
-        to_return(status: 200, body: response_body)
-    end
-
-    it 'returns a payment auth url' do
-      authorisation_url = NedbankApi::PaymentsApi.new.authorise_payment(intent_id: intent_id, redirect_uri: 'https://jono3000.ngrok.io/api/v1/soap/nedbank/authenticate')
-      expect(authorisation_url).to eq response_body
-    end
-  end
-
   describe '.submit_payment' do
     let(:request_body) { File.read('spec/support/payment/post_payment_submission_request.json') }
     let(:response_body) { File.read('spec/support/payment/post_payment_submission_response.json') }
