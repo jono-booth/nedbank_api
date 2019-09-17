@@ -1,0 +1,55 @@
+{
+    "Data": {
+        "PaymentId": "1878194005213184",
+        "Initiation": {
+            "InstructionIdentification": "2280475947171840",
+               "EndToEndIdentification": "8660132672045056",
+                     "InstructedAmount": {
+                  "Amount": "azin",
+                "Currency": "KMF"
+            },
+                          "DebtorAgent": {
+                    "SchemeName": "BICFI",
+                "Identification": "4514558947360768"
+            },
+                        "DebtorAccount": {
+                             "SchemeName": "IBAN",
+                         "Identification": "2464786822463488",
+                                   "Name": "Loretta Floyd",
+                "SecondaryIdentification": "6076228484202496"
+            },
+                        "CreditorAgent": {
+                    "SchemeName": "ZASortCode",
+                "Identification": "2884475230879744"
+            },
+                      "CreditorAccount": {
+                             "SchemeName": "IBAN",
+                         "Identification": "6011156881735680",
+                                   "Name": "Joel Ramsey",
+                "SecondaryIdentification": "7721248584892416"
+            },
+                "RemittanceInformation": {
+                "Unstructured": "vafiloturobidacubodhiflirerolimpiejikdedzahecegiplerkuvuguefegalfegutekedvutboshodromcuh",
+                   "Reference": "hiezolungewe"
+            }
+        }
+    },
+    "Risk": {
+                    "PaymentContextCode": "EcommerceGoods",
+                  "MerchantCategoryCode": "hef",
+        "MerchantCustomerIdentification": "6868618763567104",
+                       "DeliveryAddress": {
+                   "AddressLine": [
+                "misifejidnaftotasekagupecmeidewiudoo"
+            ],
+                    "StreetName": "Rana Manor",
+                "BuildingNumber": "7545658848313344",
+                      "PostCode": "H9E 8W6",
+                      "TownName": "Isaac Pierce",
+            "CountrySubDivision": [
+                "daefidutihohigopawajuboza"
+            ],
+                       "Country": "Peru"
+        }
+    }
+}

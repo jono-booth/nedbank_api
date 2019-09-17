@@ -1,0 +1,16 @@
+{
+  "PaymentSubmissionId": "62820068622336",
+  "PaymentId": "8124568155717632",
+  "Status": "AcceptedSettlementInProcess",
+  "CreationDateTime": "2001-04-10T05:12:01.053Z",
+  "Links": {
+    "self": "rirokuf",
+    "first": "Harold",
+    "prev": "botcosa",
+    "next": "ekdajkem",
+    "last": "Guerrero"
+  },
+  "Meta": {
+    "total-pages": 74810038
+  }
+}

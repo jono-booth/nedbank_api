@@ -8,6 +8,7 @@ FactoryBot.define do
 
     factory :client_with_error do
       trait :invalid_client do
+        access_token { nil }
         error_description { 'FBTOAU204E An invalid secret was provided for the client with identifier: [CLIENT_ID].' }
         error { 'invalid_client' }
       end
