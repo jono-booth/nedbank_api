@@ -19,9 +19,13 @@ And then execute:
 
 ## Documentation
 
-1. [Getting Started](docs/getting_started.md)
-2. [Authorisation API](docs/authorisations_api.md)
-3. [Payments API](docs/payments_api.md)
+**[1. Quickstart Guide](https://github.com/jono-booth/nedbank_api/wiki)**
+
+**[2. Getting Started](https://github.com/jono-booth/nedbank_api/wiki/Getting-Started)**
+
+**[3. Authorisations API](https://github.com/jono-booth/nedbank_api/wiki/Authorisations-API)**
+
+**[4. Payments API](https://github.com/jono-booth/nedbank_api/wiki/Payments-API)**
 
 
 ## Development
