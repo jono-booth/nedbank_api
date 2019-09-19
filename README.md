@@ -9,7 +9,7 @@ This gem currently only uses the Authoristaions API and Payments API. If you are
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'nedbank_api', github: 'jono-booth/nedbank_api'
+gem 'nedbank_api'
 ```
 
 And then execute:
