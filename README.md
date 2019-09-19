@@ -21,7 +21,7 @@ And then execute:
 
 **[1. Quickstart Guide](https://github.com/jono-booth/nedbank_api/wiki)**
 
-**[2. Getting Started](https://github.com/jono-booth/nedbank_api/wiki/Getting-Started)**
+**[2. Getting Started Properly](https://github.com/jono-booth/nedbank_api/wiki/Getting-Started)**
 
 **[3. Authorisations API](https://github.com/jono-booth/nedbank_api/wiki/Authorisations-API)**
 

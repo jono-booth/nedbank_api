@@ -19,16 +19,16 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_development_dependency 'bundler', '~> 1.5'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rspec-nc'
-  s.add_development_dependency 'webmock'
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'guard'
-  s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'pry-remote'
-  s.add_development_dependency 'pry-nav'
-  s.add_development_dependency 'httplog'
+  s.add_development_dependency 'rake', '~> 12.3'
+  s.add_development_dependency 'rspec', '~> 3.8'
+  s.add_development_dependency 'rspec-nc', '~> 0.3'
+  s.add_development_dependency 'webmock', '~> 3.7'
+  s.add_development_dependency 'factory_bot', '~> 5.0'
+  s.add_development_dependency 'guard', '~> 2.15'
+  s.add_development_dependency 'guard-rspec', '~> 4.7'
+  s.add_development_dependency 'pry', '~> 0.12'
+  s.add_development_dependency 'pry-remote', '~> 0.1'
+  s.add_development_dependency 'pry-nav', '~> 0.3'
+  s.add_development_dependency 'httplog', '~> 1.3'
 
 end
