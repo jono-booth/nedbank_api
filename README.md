@@ -1,9 +1,8 @@
 # NedbankApi
-**(Under Construction)**
 
 The purpose of this gem is to streamline development of a Ruby application when using the [Nedbank Marketplace API](https://apim.nedbank.co.za/static/docs).
 
-This gem currently has only the APIs that I need for my project(s). If you are in need of other parts of the API then please feel free to contribute.
+This gem currently only uses the Authoristaions API and Payments API. If you are in need of other parts of the API then please feel free to contribute or submit a feature request.
 
 ## Installation
 
