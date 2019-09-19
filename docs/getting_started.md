@@ -14,6 +14,6 @@ Your first step is to setup your environment by adding these credentials to your
 NedbankApi.configure do |config|
   config.client_id = [PROVIDED_CLIENT_ID]
   config.client_secret = [PROVIDED_CLIENT_SECRET]
-  config.api_endpoint = 'https://api.nedbank.co.za/apimarket/sandbox' # Defatul - optional
+  config.api_endpoint = 'https://api.nedbank.co.za/apimarket/sandbox' # Default - optional
 end
 ```
