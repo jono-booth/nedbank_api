@@ -40,20 +40,12 @@ RSpec.describe NedbankApi::AuthenticationsApi do
     end
   end
 
-  describe '.authorise_intent' do
+  describe '.authorise_url' do
     let(:intent_id) { "GOODPEOPLEDRINKGOODBEER" }
-    let(:request_body) { File.read('spec/support/payment/post_intent_request.json') }
-    let(:response_body) { 'https://yourapp.co.za/handle/auth/?code=xxxxxxxxxxxxxxxxxxxxxxxxxxxx' }
-
-    before :each do
-      stub_request(:post, "https://api.nedbank.co.za/apimarket/sandbox/nboauth/oauth20/authorize").
-        with(body: Regexp.new("intentid=#{intent_id}")).
-        to_return(status: 200, body: response_body)
-    end
 
     it 'returns a payment auth url' do
-      authorisation_url = NedbankApi::AuthenticationsApi.authorise_intent(request_body: { intentid: intent_id, redirect_uri: 'https://myapp.com' })
-      expect(authorisation_url).to eq response_body
+      authorisation_url = NedbankApi::AuthenticationsApi.authorisation_url(request_body: { intentid: intent_id })
+      expect(authorisation_url).to include "intentid=#{intent_id}"
     end
   end
 end

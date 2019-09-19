@@ -9,7 +9,7 @@ Using your client ID and client secret (which you obtained when you created an a
 Please note that in order to use this API, you will have to be subscribed to both the Nedbank Authorisation API and this API.
 
 ```ruby
-$ token = NedbankApi::AuthorisationsApi.request_token_light
+$ token = NedbankApi::AuthenticationsApi.request_token_light
 $ token.authenticated?
 # true
 ```
@@ -46,12 +46,13 @@ $ p payment.Data.Initiation.InstructedAmount.Currency
 To make use of the Payment ID you received in the previous call, add it to the user parameter values found below in the authorization URL to retrieve an access code that you will use to get a heavy/submission token. Make use of the url and values found below.
 
 ```ruby
-$ authorisation_url = NedbankApi::PaymentsApi.authorise_payment(
-    intent: payment.Data.PaymentId,
+$ authorisation_url = NedbankApi::AuthenticationsApi.authorise_url(
+    intentid: payment.Data.PaymentId,
+    state: [CALLBACK IDENTIFIER],
     redirect_uri: 'https://yourapp.co.za/handle/auth/'
   )
 $ p authorisation_url
-# "https://yourapp.co.za/handle/auth/?code=xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# ""https://api.nedbank.co.za/apimarket/sandbox/nboauth/oauth20/authorize?response_type=code&scope=payment...
 ```
 
 ### 4) Request token (heavy/submission)
@@ -59,7 +60,7 @@ $ p authorisation_url
 Using the code returned with the redirect URI, you must call this endpoint to get an access token for the payment submission call.
 
 ```ruby
-$ token = NedbankApi::AuthorisationsApi.request_token_heavy(
+$ token = NedbankApi::AuthenticationsApi.request_token_heavy(
     code: params[:code],
     redirect_uri: 'https://yourapp.co.za/handle/auth/'
   )

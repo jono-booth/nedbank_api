@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nedbank_api (0.1.1)
+    nedbank_api (0.2.1)
 
 GEM
   remote: https://rubygems.org/

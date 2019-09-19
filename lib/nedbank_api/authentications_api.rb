@@ -27,32 +27,30 @@ module NedbankApi
           body: URI.encode_www_form({
             client_id: NedbankApi.configuration.client_id,
             client_secret: NedbankApi.configuration.client_secret,
+            redirect_uri: NedbankApi.configuration.oauth_redirect_url,
             grant_type: 'authorization_code',
           }.merge(request_body))
         )
 
+        intent_token = Models::IntentToken.new(JSON.parse(response.body, object_class: OpenStruct))
+
         NedbankApi.intent_token = intent_token
 
-        return Models::IntentToken.new(JSON.parse(response.body, object_class: OpenStruct))
+        return intent_token
       end
 
-      def authorise_intent(request_body: {})
-        http = Http.new(url: endpoint('/nboauth/oauth20/authorize'))
+      def authorisation_url(request_body: {})
+        url = endpoint('/nboauth/oauth20/authorize')
 
         body = URI.encode_www_form({
+            client_id: NedbankApi.configuration.client_id,
+            redirect_uri: NedbankApi.configuration.oauth_redirect_url,
             response_type: 'code',
             scope: 'payments',
-            client_id: NedbankApi.configuration.client_id,
-            type: 'payments',
-            state: 'payments'
+            itype: 'payments'
         }.merge(request_body))
 
-        response = http.post(
-          headers: { "accept" => 'text/html' },
-          body: body
-        )
-
-        return response.body
+        return "#{url}?#{body}"
       end
     end
   end

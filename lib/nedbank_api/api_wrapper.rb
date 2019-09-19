@@ -2,7 +2,7 @@ module NedbankApi
   class ApiWrapper
     class << self
       def idempotency_key
-        @idempotency_key ||= rand.to_s[2..24]
+        rand.to_s[2..24]
       end
 
       def auth_headers(overrides={})
