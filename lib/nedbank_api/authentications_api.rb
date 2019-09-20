@@ -1,8 +1,13 @@
 module NedbankApi
   class AuthenticationsApi < ApiWrapper
     class << self
+      API_PATHS = {
+        request_token: 'nboauth/oauth20/token',
+        authorise: 'nboauth/oauth20/authorize'
+      }
+
       def request_token_light
-        http = Http.new(url: endpoint('/nboauth/oauth20/token'))
+        http = Http.new(url: endpoint(API_PATHS[:request_token]))
 
         response = http.post(
           body: URI.encode_www_form({
@@ -21,7 +26,7 @@ module NedbankApi
       end
 
       def request_token_heavy(request_body: {})
-        http = Http.new(url: endpoint('/nboauth/oauth20/token'))
+        http = Http.new(url: endpoint(API_PATHS[:request_token]))
 
         response = http.post(
           body: URI.encode_www_form({
@@ -40,7 +45,7 @@ module NedbankApi
       end
 
       def authorisation_url(request_body: {})
-        url = endpoint('/nboauth/oauth20/authorize')
+        url = endpoint(API_PATHS[:authorise])
 
         body = URI.encode_www_form({
             client_id: NedbankApi.configuration.client_id,

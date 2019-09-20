@@ -1,10 +1,6 @@
 module NedbankApi
   class ApiWrapper
     class << self
-      def idempotency_key
-        rand.to_s[2..24]
-      end
-
       def auth_headers(overrides={})
         {
           "Content-Type" => "application/json",
@@ -17,8 +13,12 @@ module NedbankApi
         }.merge(overrides)
       end
 
-      def endpoint(path)
-        NedbankApi.configuration.api_endpoint + path
+      def idempotency_key
+        rand.to_s[2..24]
+      end
+
+      def endpoint(path, suffix: nil)
+        [NedbankApi.configuration.api_endpoint, path, suffix].compact.join('/')
       end
 
       def json_to_object(json)

@@ -1,4 +1,8 @@
 RSpec.describe NedbankApi::PaymentsApi do
+  before :each do
+    NedbankApi.intent_token = build(:fake_client)
+  end
+
   describe '.create_intent' do
     let(:request_body) { File.read('spec/support/payment/post_intent_request.json') }
     let(:response_body) { File.read('spec/support/payment/post_intent_response.json') }

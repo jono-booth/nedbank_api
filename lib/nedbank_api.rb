@@ -18,8 +18,6 @@ require 'uri'
 require 'securerandom'
 
 module NedbankApi
-  @intent_token = Models::IntentToken.new(Object.new)
-
   class << self
     attr_accessor :intent_token,
       :configuration

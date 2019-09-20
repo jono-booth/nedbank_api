@@ -1,8 +1,14 @@
 module NedbankApi
   class PaymentsApi < ApiWrapper
     class << self
-      def create_intent(request_body: {})
-        http = Http.new(url: endpoint('/open-banking/payments'))
+
+      API_PATHS = {
+        payments: 'open-banking/payments',
+        payment_submissions: 'open-banking/payment-submissions'
+      }
+
+      def create_intent(request_body: {}, headers: {})
+        http = Http.new(url: endpoint(API_PATHS[:payments]))
 
         response = http.post(
           headers: auth_headers,
@@ -12,8 +18,8 @@ module NedbankApi
         return Models::Payment.new(json_to_object(response.body))
       end
 
-      def submit_payment(request_body: {})
-        http = Http.new(url: endpoint('/open-banking/payment-submissions'))
+      def submit_payment(request_body: {}, headers: {})
+        http = Http.new(url: endpoint(API_PATHS[:payment_submissions]))
 
         response = http.post(
           headers: auth_headers,
@@ -23,8 +29,8 @@ module NedbankApi
         return Models::PaymentSubmission.new(json_to_object(response.body))
       end
 
-      def get_payment_submission(payment_submission_id:)
-        http = Http.new(url: endpoint('/open-banking/payment-submissions/' + payment_submission_id))
+      def get_payment_submission(payment_submission_id:, headers: {})
+        http = Http.new(url: endpoint(API_PATHS[:payment_submissions], suffix: payment_submission_id))
 
         response = http.get(
           headers: auth_headers
