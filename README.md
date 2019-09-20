@@ -1,4 +1,4 @@
-# NedbankApi
+# Nedbank API
 
 The purpose of this gem is to streamline development of a Ruby application when using the [Nedbank Marketplace API](https://apim.nedbank.co.za/static/docs).
 
